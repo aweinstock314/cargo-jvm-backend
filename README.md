@@ -13,3 +13,13 @@ Compile Rust to JVM classes
 - possibly use jni-bindgen for importing class/function signatures, and specify which {.class,.jar} files to look at via the {macro,trait,toml}
 - use one of {asmble,lljvm} to get bytecode for the crate, generating glue for the imports
 - generate class files for the bytecode based on the export metadata
+
+## manually building the class with asmble
+Assumes that `asmble` is on PATH.
+
+```bash
+cd examples/hello-world-java
+cargo build --release --target=wasm32-unknown-unknown
+asmble compile target/wasm32-unknown-unknown/release/hello-world-java.wasm Hello
+javap Hello
+```
